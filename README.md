@@ -88,6 +88,12 @@ gateway 192.168.67.1
 dns-nameservers 8.8.4.4 8.8.8.8
 ```
 
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+```
+
 Now you should be able to execute x86_64 Linux binaries as though they were
 native. Bare in mind, however, that you need all your Linux app's required
 libraries in x86_64. On Ubuntu these are installable by adding the following to
