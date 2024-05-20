@@ -32,6 +32,21 @@ do the following:
 ### Setting Debian12 (with chromedriver and aws)
 
 
+```bash
+dpkg --add-architecture amd64
+apt update
+mkdir /media/rosetta
+mount -t virtiofs ROSETTA /media/rosetta
+/usr/sbin/update-binfmts --install rosetta /media/rosetta/rosetta --magic "\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00"     --mask "\xff\xff\xff\xff\xff\xfe\xfe\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff"     --credentials yes --preserve no --fix-binary yes
+```
+Add this to /etc/fstab
+```
+ROSETTA	/media/rosetta	virtiofs	ro,nofail	0
+```
+```bash
+apt install curl:amd64 vim binfmt-support chromium clamav clamav-daemon spice-vdagent python3-virtualenv libglib2.0-dev:amd64 libnss3:amd64 libxcb1:amd64
+```
+
 ### Setting up Rosetta
 
 When you start the RosettaVM app, you should be prompted by the app to select
