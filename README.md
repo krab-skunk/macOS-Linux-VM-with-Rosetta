@@ -78,6 +78,15 @@ sudo /usr/sbin/update-binfmts --install rosetta /var/run/rosetta/rosetta \
     --mask "\xff\xff\xff\xff\xff\xfe\xfe\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" \
     --credentials yes --preserve no --fix-binary yes
 ```
+/etc/network/interfaces
+```
+auto enp0s1
+iface enp0s1 inet static
+address 192.168.67.25
+netmask 255.255.255.0
+gateway 192.168.67.1
+dns-nameservers 8.8.4.4 8.8.8.8
+```
 
 Now you should be able to execute x86_64 Linux binaries as though they were
 native. Bare in mind, however, that you need all your Linux app's required
