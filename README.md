@@ -29,6 +29,9 @@ do the following:
    the `Signing Certificate` drop-down to `Sign to run locally`
 1. Click the `>` (Run) button at the top-left of the XCode window
 
+### Setting Debian12 (with chromedriver and aws)
+
+
 ### Setting up Rosetta
 
 When you start the RosettaVM app, you should be prompted by the app to select
