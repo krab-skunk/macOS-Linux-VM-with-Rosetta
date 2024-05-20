@@ -7,8 +7,9 @@ The app delegate that sets up and starts the virtual machine.
 
 import Virtualization
 
-let vmBundlePath = NSHomeDirectory() + "/RosettaVM.bundle/"
-let mainDiskImagePath = vmBundlePath + "Disk.img"
+let homeDirURL = FileManager.default.homeDirectoryForCurrentUser
+let vmBundlePath = homeDirURL.path() + "/RosettaVM.bundle/"
+let mainDiskImagePath = vmBundlePath + "Disk.img" //~/Library/Containers/com.
 let efiVariableStorePath = vmBundlePath + "NVRAM"
 let machineIdentifierPath = vmBundlePath + "MachineIdentifier"
 
@@ -98,7 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VZVirtualMachineDelegate {
 
         do {
             // 64 GB disk space.
-            try mainDiskFileHandle.truncate(atOffset: 64 * 1024 * 1024 * 1024)
+            try mainDiskFileHandle.truncate(atOffset: 20 * 1024 * 1024 * 1024)
         } catch {
             throw RosettaVMError("Could not truncate the VM's main disk image.")
         }
@@ -126,7 +127,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VZVirtualMachineDelegate {
     }
 
     private func computeMemorySize() -> UInt64 {
-        var memorySize = (4 * 1024 * 1024 * 1024) as UInt64 // 4 GiB
+        var memorySize = (2 * 1024 * 1024 * 1024) as UInt64 // 4 GiB
         memorySize = max(memorySize, VZVirtualMachineConfiguration.minimumAllowedMemorySize)
         memorySize = min(memorySize, VZVirtualMachineConfiguration.maximumAllowedMemorySize)
 
@@ -244,6 +245,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, VZVirtualMachineDelegate {
             bootloader.variableStore = try createEFIVariableStore()
             disksArray.add(try createUSBMassStorageDeviceConfiguration())
         } else {
+            print(mainDiskImagePath)
             // The VM is booting from a disk image that already has the OS installed.
             // Retrieve the machine identifier and EFI variable store that were saved to
             // disk during installation.
