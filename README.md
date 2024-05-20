@@ -46,6 +46,21 @@ ROSETTA	/media/rosetta	virtiofs	ro,nofail	0
 ```bash
 apt install curl:amd64 vim binfmt-support chromium clamav clamav-daemon spice-vdagent python3-virtualenv libglib2.0-dev:amd64 libnss3:amd64 libxcb1:amd64
 ```
+/etc/network/interfaces
+```
+auto enp0s1
+iface enp0s1 inet static
+address 192.168.67.25
+netmask 255.255.255.0
+gateway 192.168.67.1
+dns-nameservers 8.8.4.4 8.8.8.8
+```
+aws cli
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+./aws/install
+```
 
 ### Setting up Rosetta
 
@@ -78,21 +93,7 @@ sudo /usr/sbin/update-binfmts --install rosetta /var/run/rosetta/rosetta \
     --mask "\xff\xff\xff\xff\xff\xfe\xfe\x00\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff" \
     --credentials yes --preserve no --fix-binary yes
 ```
-/etc/network/interfaces
-```
-auto enp0s1
-iface enp0s1 inet static
-address 192.168.67.25
-netmask 255.255.255.0
-gateway 192.168.67.1
-dns-nameservers 8.8.4.4 8.8.8.8
-```
-aws cli
-```bash
-curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-./aws/install
-```
+
 
 Now you should be able to execute x86_64 Linux binaries as though they were
 native. Bare in mind, however, that you need all your Linux app's required
