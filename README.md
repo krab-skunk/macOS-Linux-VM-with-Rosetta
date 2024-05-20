@@ -87,7 +87,7 @@ netmask 255.255.255.0
 gateway 192.168.67.1
 dns-nameservers 8.8.4.4 8.8.8.8
 ```
-
+aws cli
 ```bash
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
